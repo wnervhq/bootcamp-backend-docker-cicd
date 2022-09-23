@@ -61,5 +61,5 @@ jobs:
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "${{ env.IMAGE_NAME }}-whqv2" #Must be unique in Heroku
-          heroku_email: "${{ REGISTRY_MAIL }}"
+          heroku_email: "${{ env.REGISTRY_MAIL }}"
           usedocker: true
