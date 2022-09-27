@@ -13,14 +13,14 @@ env:
 
 jobs:
   SECRET:
-    runs-on: ubuntu—latest
-    name: Secret—Scanner
+    runs-on: ubuntu-latest
+    name: Secret-Scanner
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch—depth: 0
+          fetch-depth: 0
       - name: Secret Detection
-        uses: zricethezav/gitleaks—action@master
+        uses: zricethezav/gitleaks-action@master
         continue-on-error: true
 
   init:
