@@ -12,17 +12,6 @@ env:
   REGISTRY_MAIL: luis.molina.calizaya@gmail.com
 
 jobs:
-  SECRET:
-    runs-on: ubuntu-latest
-    name: Secret-Scanner
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Secret Detection
-        uses: zricethezav/gitleaks-action@master
-        continue-on-error: true
-
   init:
     runs-on: ubuntu-latest
     strategy:
@@ -37,6 +26,18 @@ jobs:
         cache: 'npm'
     - run: npm install
     - run: npm test
+
+  SECRET:
+    runs-on: ubuntu-latest
+    needs: init
+    name: Secret-Scanner
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Secret Detection
+        uses: zricethezav/gitleaks-action@master
+        continue-on-error: true
 
   trivy-security:
     runs-on: ubuntu-latest
