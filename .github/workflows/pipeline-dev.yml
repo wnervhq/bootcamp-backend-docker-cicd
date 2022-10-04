@@ -5,8 +5,9 @@ on:
     branches: [ "develop" ]
 
 env:
-  REGISTRY: roxsross12
+  REGISTRY: wnervhq
   IMAGE_NAME: bootcamp-backend-docker
+  REGISTRY_MAIL: luis.molina.calizaya@gmail.com
 
 jobs:
 
@@ -74,7 +75,7 @@ jobs:
     - name: Login to DockerHub
       uses: docker/login-action@v2
       with:
-        username: ${{ secrets.DOCKER_USERNAME }}
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Build and push
       uses: docker/build-push-action@v3
@@ -90,8 +91,8 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "bootcamp-backend-docker" #Must be unique in Heroku
-          heroku_email: "roxsrossve@gmail.com"
+          heroku_app_name: "${{ env.IMAGE_NAME }}-whqv2" #Must be unique in Heroku
+          heroku_email: "${{ env.REGISTRY_MAIL }}"
           usedocker: true  
 
   dast_scan:
@@ -105,4 +106,4 @@ jobs:
       - name: ZAP Scan
         uses: zaproxy/action-baseline@v0.7.0
         with:
-          target: 'https://bootcamp-backend-docker.herokuapp.com/'          
+          target: 'https://bootcamp-backend-docker-whqv2.herokuapp.com/'          

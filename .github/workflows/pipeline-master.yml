@@ -5,8 +5,9 @@ on:
     branches: [ "master" ]
 
 env:
-  REGISTRY: roxsross12
+  REGISTRY: wnervhq
   IMAGE_NAME: bootcamp-backend-docker
+  REGISTRY_MAIL: luis.molina.calizaya@gmail.com
 
 jobs:
 
@@ -40,5 +41,5 @@ jobs:
         application_name: bootcamp-295devops
         environment_name: Bootcamp295devops-env
         version_label: ${{ github.sha }}
-        region: us-east-1
+        region: ${{ secrets.AWS_REGION }}
         deployment_package: deploy.zip     
